@@ -2,6 +2,8 @@
 <html>
 <head>
 <style>
+
+
 body {
   margin: 0;
 }
@@ -43,12 +45,32 @@ li a:hover:not(.active) {
   <li><a href="#Preferiti">Preferiti</a></li>
   <li><a href="Aggiungi.php">Aggiungi contatto</a></li>
 
+
   
 </ul>
 
 <div style="margin-left:25%;padding:1px 16px;height:1000px;">
+  
+ <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "rubrica";
 
 
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+$sql = "SELECT  Nome, Cognome, Numero FROM contatti";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+   
+    while($row = $result->fetch_assoc()) {
+        echo "Nome: " . $row["Nome"]. " Cognome: " . $row["Cognome"].  " Numero " . $row["Numero"]. "<br>";
+    }
+}
+$conn->close();
+?>
 
 </div>
 

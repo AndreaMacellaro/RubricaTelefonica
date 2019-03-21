@@ -36,6 +36,7 @@ li a:hover:not(.active) {
   background-color: darkred;
   color: white;
 }
+
 </style>
 </head>
 <body>
@@ -49,8 +50,36 @@ li a:hover:not(.active) {
 
 <div style="margin-left:25%;padding:1px 16px;height:1000px;">
  
+  <h1>Nuovo Contatto</h1>
+  <form action= "" method="POST">
+    Nome:<input type="text" name="nome"><br><br>
+    Cognome:<input type="text" name="cognome"><br><br>
+     Numero:<input type="text" name="numero"><br><br>
+    <input type="submit" name="INVIO">
+</form>
 </div>
 
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "rubrica";
+
+$Numero = $_POST['numero'];
+$Nome = $_POST['nome'];
+$Cognome = $_POST['cognome'];
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+$sql = "INSERT INTO contatti ( Nome , Cognome, Numero)
+VALUES ('{$Nome}','{$Cognome}','{$Numero}')";
+
+
+
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+} 
+else $conn->error;
+?>
 
 
 </body>
