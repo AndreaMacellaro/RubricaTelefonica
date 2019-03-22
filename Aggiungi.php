@@ -5,8 +5,9 @@
 body {
   margin: 0;
 }
-
-
+h1{
+  font-family: Arial;
+}
 
 ul {
   list-style-type: none;
@@ -37,12 +38,17 @@ li a:hover:not(.active) {
   color: white;
 }
 
+table{
+  background-color: #f1f1f1;
+
+}
+
 </style>
 </head>
 <body>
 
 <ul>
-  <li><a href="Rubrica.html" href="#Contatti">Contatti</a></li>
+  <li><a href="Contatti.php">Contatti</a></li>
   <li><a href="#Preferiti">Preferiti</a></li>
   <li><a class="active" href="Aggiungi.php">Aggiungi contatto</a></li>
   
@@ -51,12 +57,19 @@ li a:hover:not(.active) {
 <div style="margin-left:25%;padding:1px 16px;height:1000px;">
  
   <h1>Nuovo Contatto</h1>
+  <table>
   <form action= "" method="POST">
-    Nome:<input type="text" name="nome"><br><br>
-    Cognome:<input type="text" name="cognome"><br><br>
-     Numero:<input type="text" name="numero"><br><br>
-    <input type="submit" name="INVIO">
+    <tr>
+    <td>Nome:<input type="text" name="nome"><br><br></td>
+    <td>Cognome:<input type="text" name="cognome"><br><br></td>
+  </tr>
+    
+      <tr>
+     <td>Numero:<input type="text" name="numero"></td>
+    <td><input type="submit" name="INVIO" value="Aggiungi contatto"></td>
+  </tr>
 </form>
+</table>
 </div>
 
 <?php
@@ -73,7 +86,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 $sql = "INSERT INTO contatti ( Nome , Cognome, Numero)
 VALUES ('{$Nome}','{$Cognome}','{$Numero}')";
 
+if($_POST['nome']==NULL || $_POST['cognome']==NULL || $_POST['numero']==NULL){
 
+  die('Errore,compilare tutti i campi!');
+}
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

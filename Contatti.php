@@ -36,6 +36,15 @@ li a:hover:not(.active) {
   background-color: darkred;
   color: white;
 }
+table{
+  background-color:#f1f1f1;
+  border:solid;
+  border-collapse: collapse;
+  
+}
+td,tr,th{
+	border:solid ;
+}
 </style>
 </head>
 <body>
@@ -64,10 +73,11 @@ $sql = "SELECT  Nome, Cognome, Numero FROM contatti";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-   
+   echo "<table><tr><th>Nome</th><th>Cognome</th><th>Numero</th></tr>";
     while($row = $result->fetch_assoc()) {
-        echo "Nome: " . $row["Nome"]. " Cognome: " . $row["Cognome"].  " Numero " . $row["Numero"]. "<br>";
+        echo "<tr><td>" . $row["Nome"]. " </td><td> " . $row["Cognome"].  " </td><td> " . $row["Numero"]. "</td></tr>"."<br>";
     }
+    echo "</table>";
 }
 $conn->close();
 ?>
